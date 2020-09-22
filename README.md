@@ -10,13 +10,13 @@ A lightweight bottomsheetdialog like material design
 
 ### Gradle 
 Add below codes to your **root** `build.gradle` file (not your module build.gradle file).
-
+```
 allprojects {
     repositories {
         jcenter()
     }
 }
-
+```
 And add a dependency code to your **module**'s `build.gradle` file.
 ```gradle
 dependencies {
@@ -27,15 +27,13 @@ dependencies {
 ## Usage
 ### Basic Example
 ```kotlin
-bottom_sheet_list.setOnClickListener {
-            SolarBottomSheet(
-                context = it.context,
-                type = BottomSheetType.LIST,
-                items = list,
-                onSelectedItem = { dialog, position, text ->
-                    dialog.dismiss()
-                    Toast.makeText(dialog.context, text, Toast.LENGTH_SHORT).show()
-                })
-                .show()
-        }
+SolarBottomSheet(
+  context = it.context,
+  type = BottomSheetType.LIST,
+  items = list,
+  onSelectedItem = { dialog, position, text ->
+    dialog.dismiss()
+    Toast.makeText(dialog.context, text, Toast.LENGTH_SHORT).show()
+  }
+).show()
 ```
