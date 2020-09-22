@@ -1,24 +1,23 @@
 package com.solar.bottomsheetdialog
 
 import android.content.Context
-import android.content.res.Resources
 import android.util.TypedValue
 import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.annotation.AttrRes
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.view.marginTop
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class SolarBottomSheet(
     private val context: Context,
     private val type: BottomSheetType = BottomSheetType.LIST,
     private val title: String = "",
-    private val list: List<BottomSheetItem> = listOf(),
+    private val items: List<BottomSheetItem> = listOf(),
     private val isRippleEffect: Boolean = true,
+    private inline val onSelectedItem: ((bottomSheet: BottomSheetDialog, position: Int, text: String) -> Unit)?,
     private val style: Int? = R.style.AppBottomSheetDialogTheme
 ) {
 
@@ -36,17 +35,17 @@ class SolarBottomSheet(
             orientation = LinearLayout.VERTICAL
 
             if (title.isNotEmpty()) {
-                addView(generateListItemView(context, BottomSheetItem(title), false))
+                addView(generateListItemView(-1, context, BottomSheetItem(title), false))
             }
 
             when(type) {
                 BottomSheetType.LIST -> {
-                    list.forEach { item ->
-                        addView(generateListItemView(context, item, isRippleEffect))
+                    items.forEachIndexed { position, item ->
+                        addView(generateListItemView(position, context, item, isRippleEffect))
                     }
                 }
                 BottomSheetType.GRID -> {
-                    addView(generateGridItemView(context, list))
+                    addView(generateGridItemView(context, items, title))
                 }
             }
         }
@@ -66,7 +65,8 @@ class SolarBottomSheet(
             dp, context.resources.displayMetrics).toInt()
     }
 
-    private fun generateListItemView(context: Context,
+    private fun generateListItemView(position: Int,
+                                     context: Context,
                                      item: BottomSheetItem,
                                      isRippleEffect: Boolean) : LinearLayout {
         val padding = getDp(LIST_ITEM_PADDING)
@@ -79,7 +79,7 @@ class SolarBottomSheet(
             gravity = Gravity.CENTER_VERTICAL
             setPadding(padding, padding, padding, padding)
 
-            if (isRippleEffect) enableRippleEffect(this)
+            if (isRippleEffect) enableRippleEffect(this, android.R.attr.selectableItemBackground)
         }
 
         item.iconRes?.let { iconRes ->
@@ -103,13 +103,17 @@ class SolarBottomSheet(
 
         linearLayout.addView(tv)
         linearLayout.setOnClickListener {
-            Toast.makeText(context, item.str, Toast.LENGTH_SHORT).show()
+            if (onSelectedItem != null)
+                onSelectedItem.invoke(dialog, position, item.str ?: "")
+            else
+                dismiss()
+
         }
 
         return linearLayout
     }
 
-    private fun generateGridItemView(context: Context, list: List<BottomSheetItem>): GridView {
+    private fun generateGridItemView(context: Context, list: List<BottomSheetItem>, title: String): GridView {
         return GridView(context).apply {
             adapter = GridAdapter(list)
             numColumns = 3
@@ -118,7 +122,7 @@ class SolarBottomSheet(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT).apply {
                 gravity = Gravity.CENTER
-                setPadding(0, 0, 0, getDp(24.0f))
+                setPadding(0, if (title.isEmpty()) getDp(24.0f) else 0, 0, getDp(24.0f))
             }
         }
     }
@@ -126,7 +130,7 @@ class SolarBottomSheet(
     private inner class GridAdapter(private val list: List<BottomSheetItem>) : BaseAdapter() {
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
             return parent?.let {
-                convertView?:getGridItemView(parent.context, list[position])
+                convertView?:getGridItemView(position, parent.context, list[position])
             }?:convertView
         }
 
@@ -134,7 +138,7 @@ class SolarBottomSheet(
         override fun getItemId(position: Int): Long = list[position].hashCode().toLong()
         override fun getCount(): Int = list.size
 
-        private fun getGridItemView(context: Context, item: BottomSheetItem): View {
+        private fun getGridItemView(position: Int, context: Context, item: BottomSheetItem): View {
             val ll = LinearLayout(context).apply {
                 orientation = LinearLayout.VERTICAL
                 layoutParams = LinearLayout.LayoutParams(
@@ -176,17 +180,22 @@ class SolarBottomSheet(
             }
 
             ll.setOnClickListener {
-                Toast.makeText(context, item.str, Toast.LENGTH_SHORT).show()
+                if (onSelectedItem != null)
+                    onSelectedItem.invoke(dialog, position, item.str ?: "")
+                else
+                    dismiss()
             }
+
+            if (isRippleEffect) enableRippleEffect(ll, android.R.attr.selectableItemBackgroundBorderless)
 
             return ll
         }
     }
 
-    private fun enableRippleEffect(view: View) {
+    private fun enableRippleEffect(view: View, @AttrRes resId: Int) {
         val outValue = TypedValue()
         view.context.theme.resolveAttribute(
-            android.R.attr.selectableItemBackground,
+            resId,
             outValue,
             true)
 
