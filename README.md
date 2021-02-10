@@ -31,7 +31,7 @@ dependencies {
 ```kotlin
 MaterialBottomSheet(this, R.style.BottomSheetThemeLight)
   .title("Open in") // Optional
-  .items(items) 
+  .items(items) // List of 'BottomSheetItem'
   .setRippleEffect(true) // Default is true
   .type(BottomSheetType.LIST) // LIST, GRID
   .config(bottomSheetConfig) // Cofing Color(Optional)
