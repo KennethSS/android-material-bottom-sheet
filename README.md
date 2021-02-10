@@ -21,7 +21,7 @@ allprojects {
 
 ```gradle
 dependencies {
-  implementation 'com.github.KennethSS:android-material-bottom-sheet:1.1.0'
+  implementation 'com.github.KennethSS:android-material-bottom-sheet:1.1.1'
 }
 ```
 
