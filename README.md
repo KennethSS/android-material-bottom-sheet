@@ -49,7 +49,7 @@ MaterialBottomSheet(this, R.style.BottomSheetThemeLight)
 ### Config Color
 ```kotlin
 val config = BottomSheetConfig(
-              itemIconTintColor = Color.RED,
-              titleColor = Color.BLUE
+                 itemIconTintColor = Color.RED,
+                 titleColor = Color.BLUE
              ) 
 ```
