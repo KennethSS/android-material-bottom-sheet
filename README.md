@@ -33,7 +33,8 @@ MaterialBottomSheet(this, R.style.BottomSheetThemeLight)
   .title("Open in") // Optional
   .items(items) 
   .setRippleEffect(true) // Default is true
-  .type(BottomSheetType.LIST)
+  .type(BottomSheetType.LIST) // LIST, GRID
+  .config(bottomSheetConfig) // Cofing Color(Optional)
   .select { index, item ->
     when(index) {
       0 -> {
@@ -42,4 +43,14 @@ MaterialBottomSheet(this, R.style.BottomSheetThemeLight)
     }
   }
   .show()
+```
+
+
+### Config Color
+```kotlin
+val config = BottomSheetConfig(
+              itemIconTintColor = Color.RED,
+              titleColor = Color.BLUE
+             )
+.          
 ```
