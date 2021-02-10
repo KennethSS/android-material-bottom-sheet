@@ -58,6 +58,10 @@ class GridBottomSheet @JvmOverloads constructor(
 
         val gridView = getGridView(context, items, title, config, onSelected)
         addView(gridView)
+
+        config.backgroundColor?.let { bgColor ->
+            setBackgroundColor(bgColor)
+        }
     }
 
     private fun getGridView(

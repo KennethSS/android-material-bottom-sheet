@@ -26,14 +26,9 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomSheetList.setOnClickListener {
             MaterialBottomSheet(this, R.style.BottomSheetThemeLight)
-                .title("Open in")
                 .items(items)
                 .setRippleEffect(true)
                 .type(BottomSheetType.LIST)
-                .config(BottomSheetConfig(
-                    itemIconTintColor = Color.RED,
-                    titleColor = Color.BLUE
-                ))
                 .select { index, item ->
                     when(index) {
                         0 -> {
@@ -68,7 +63,9 @@ class MainActivity : AppCompatActivity() {
                 .type(BottomSheetType.GRID)
                 .config(BottomSheetConfig(
                     itemIconTintColor = Color.RED,
-                    titleColor = Color.BLUE
+                    titleColor = Color.BLUE,
+                    itemTextColor = Color.WHITE,
+                    backgroundColor = Color.BLACK
                 ))
                 .select { index, item ->
                     Toast.makeText(this, item.str, Toast.LENGTH_SHORT).show()

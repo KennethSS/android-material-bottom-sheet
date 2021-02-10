@@ -76,6 +76,10 @@ class VerticalBottomSheet @JvmOverloads constructor(
                 }
             }
         }
+
+        config.backgroundColor?.let { bgColor ->
+            setBackgroundColor(bgColor)
+        }
     }
 
 

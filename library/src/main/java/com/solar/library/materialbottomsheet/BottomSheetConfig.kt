@@ -21,5 +21,6 @@ import android.graphics.Color
 data class BottomSheetConfig(
     val itemTextColor: Int = Color.BLACK,
     val itemIconTintColor: Int? = null,
-    val titleColor: Int? = null
+    val titleColor: Int? = null,
+    val backgroundColor: Int? = null
 )
