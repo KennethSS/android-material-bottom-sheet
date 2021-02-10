@@ -1,7 +1,7 @@
 <h1 align="center">Android Material BottomSheet</h1></br>
 
 <p align="center">
-This is select bottomsheet dialog for material design
+This is selectable bottomsheet dialog for material design
 
 </p>
 
