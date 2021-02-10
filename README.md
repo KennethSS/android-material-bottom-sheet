@@ -51,6 +51,5 @@ MaterialBottomSheet(this, R.style.BottomSheetThemeLight)
 val config = BottomSheetConfig(
               itemIconTintColor = Color.RED,
               titleColor = Color.BLUE
-             )
-.          
+             ) 
 ```
