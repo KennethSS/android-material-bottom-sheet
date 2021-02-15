@@ -18,59 +18,57 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val items = listOf(
-            BottomSheetItem(str  = "Share", iconRes = R.drawable.ic_baseline_share_24),
-            BottomSheetItem("Upload", iconRes = R.drawable.ic_baseline_cloud_upload_24),
-            BottomSheetItem("Copy", iconRes = R.drawable.ic_baseline_file_copy_24),
-            BottomSheetItem("Print this page", iconRes = R.drawable.ic_baseline_local_printshop_24)
+                BottomSheetItem(str = "Share", iconRes = R.drawable.ic_baseline_share_24),
+                BottomSheetItem("Upload", iconRes = R.drawable.ic_baseline_cloud_upload_24),
+                BottomSheetItem("Copy", iconRes = R.drawable.ic_baseline_file_copy_24),
+                BottomSheetItem("Print this page", iconRes = R.drawable.ic_baseline_local_printshop_24)
         )
 
         binding.bottomSheetList.setOnClickListener {
             MaterialBottomSheet(this, R.style.BottomSheetThemeLight)
-                .items(items)
-                .setRippleEffect(true)
-                .type(BottomSheetType.LIST)
-                .select { index, item ->
-                    when(index) {
-                        0 -> {
-                            // Something else
+                    .items(items)
+                    .setRippleEffect(true)
+                    .type(BottomSheetType.LIST)
+                    .select { index, item ->
+                        when (index) {
+                            0 -> {
+                                // Something else
+                            }
                         }
                     }
-                }
-                .show()
+                    .show()
         }
 
         binding.bottomSheetListDark.setOnClickListener {
             MaterialBottomSheet(this, R.style.BottomSheetThemeDark)
-                .title("Open in")
-                .items(items)
-                .setRippleEffect(true)
-                .type(BottomSheetType.LIST)
-                .select { index, item ->
-                    when(index) {
-                        0 -> {
-                            // Something else
+                    .items(items)
+                    .setRippleEffect(true)
+                    .type(BottomSheetType.LIST)
+                    .config(BottomSheetConfig(
+                            itemIconTintColor = Color.WHITE,
+                            titleColor = Color.WHITE,
+                            itemTextColor = Color.WHITE
+                    ))
+                    .select { index, item ->
+                        when (index) {
+                            0 -> {
+                                // Something else
+                            }
                         }
                     }
-                }
-                .show()
+                    .show()
         }
 
         binding.bottomSheetGrid.setOnClickListener {
             MaterialBottomSheet(this)
-                .title("Open in")
-                .items(items)
-                .setRippleEffect(true)
-                .type(BottomSheetType.GRID)
-                .config(BottomSheetConfig(
-                    itemIconTintColor = Color.RED,
-                    titleColor = Color.BLUE,
-                    itemTextColor = Color.WHITE,
-                    backgroundColor = Color.BLACK
-                ))
-                .select { index, item ->
-                    Toast.makeText(this, item.str, Toast.LENGTH_SHORT).show()
-                }
-                .show()
+                    .title("Open in")
+                    .items(items)
+                    .setRippleEffect(true)
+                    .type(BottomSheetType.GRID)
+                    .select { index, item ->
+                        Toast.makeText(this, item.str, Toast.LENGTH_SHORT).show()
+                    }
+                    .show()
         }
     }
 }
