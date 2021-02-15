@@ -9,9 +9,9 @@ This is the bottom sheet selection dialog for material design.
   <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
 </p>
 
-<img src="https://github.com/KennethSS/android-material-bottom-sheet/blob/master/preview/list_light.jpeg"</img>
-<img src="https://github.com/KennethSS/android-material-bottom-sheet/blob/master/preview/list_dark.jpeg"</img>
-<img src="https://github.com/KennethSS/android-material-bottom-sheet/blob/master/preview/grid.jpeg"</img>
+<img src="https://github.com/KennethSS/android-material-bottom-sheet/blob/master/preview/list_light.jpeg"></img>
+<img src="https://github.com/KennethSS/android-material-bottom-sheet/blob/master/preview/list_dark.jpeg"></img>
+<img src="https://github.com/KennethSS/android-material-bottom-sheet/blob/master/preview/grid.jpeg"></img>
 
 ### Dependency Gradle 
 Add below codes to your **root** `build.gradle` file (not your module build.gradle file).
