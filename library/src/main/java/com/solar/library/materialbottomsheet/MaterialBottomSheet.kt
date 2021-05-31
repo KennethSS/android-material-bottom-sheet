@@ -62,6 +62,8 @@ class MaterialBottomSheet(
         this.config = config
     }
 
+    fun isShowing(): Boolean = dialog.isShowing
+
     fun show() {
         val view = when(type) {
             BottomSheetType.LIST -> getVerticalView()
